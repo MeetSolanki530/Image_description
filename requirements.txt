@@ -1,0 +1,4 @@
+ollama
+base64
+streamlit
+pandas
