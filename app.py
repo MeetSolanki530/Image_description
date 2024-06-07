@@ -2,6 +2,18 @@ import pandas as pd
 import streamlit as st
 import base64
 import ollama  # Import the Ollama client
+import subprocess
+
+
+# Ensure the llava:7b model is downloaded
+def download_model():
+    try:
+        subprocess.run(['ollama', 'download', 'llava:7b'], check=True)
+    except subprocess.CalledProcessError as e:
+        st.error(f"Failed to download model: {e}")
+        st.stop()
+
+download_model()
 
 st.set_page_config(
     page_title="Image to Text",
