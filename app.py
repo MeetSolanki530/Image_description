@@ -5,14 +5,21 @@ import ollama  # Import the Ollama client
 import subprocess
 
 
-# Ensure the llava:7b model is downloaded
-def download_model():
-    try:
-        subprocess.run(['ollama', 'download', 'llava:7b'], check=True)
-    except subprocess.CalledProcessError as e:
-        st.error(f"Failed to download model: {e}")
-        st.stop()
+# Path to check if model is downloaded
+MODEL_PATH = "llava_model_downloaded.txt"
 
+def download_model():
+    if not os.path.exists(MODEL_PATH):
+        try:
+            subprocess.run(['ollama', 'download', 'llava:7b'], check=True)
+            # Create a file to indicate the model has been downloaded
+            with open(MODEL_PATH, 'w') as f:
+                f.write("Model downloaded.")
+        except subprocess.CalledProcessError as e:
+            st.error(f"Failed to download model: {e}")
+            st.stop()
+
+# Ensure the llava:7b model is downloaded
 download_model()
 
 st.set_page_config(
