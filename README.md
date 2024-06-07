@@ -1,1 +1,1 @@
-"# Image_description" 
+# Image_description
